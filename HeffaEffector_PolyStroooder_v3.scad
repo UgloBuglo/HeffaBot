@@ -30,6 +30,18 @@ module mountHole() {
 }
 
 
+module hexagonHole() {
+    hull(){
+        for (a = [30:60:360]) {
+            rotate([0, 0, a]) {
+                translate([0, 5, 0])
+                circle(r=1.5, center=true, $fn=15);
+            }
+        }
+    }
+}    
+    
+
 module effector_2d() {
     
     difference() {
@@ -69,9 +81,24 @@ module effector_2d() {
             }
         }
 
+        // cut out holes for mounting fans and other stuff
+        for (a = [0:120:360]) {
+            rotate([0, 0, a]) {
+                translate([0, offset, 0])
+                circle(r=m3_wide_radius, center=true, $fn=15);
+            }
+        }
 
+        // cut out hexagon holes for cable management
+        for (a = [60:120:360]) {
+            rotate([0, 0, a]) {
+                translate([0, offset, 0])
+                hexagonHole();
+            }
+        }
     }
     
+
 }
 
 
