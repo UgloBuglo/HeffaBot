@@ -1,24 +1,15 @@
 include <configuration.scad>;
-use     <HeffaEffector_Polystroooder_v4.scad>;
+use     <HeffaEffector_Polystroooder.scad>;
 
 $fn = 360/4;
 lightRingOutsideDiameter= 60;
 lightRingInsideDiameter = 51;
 lightRingAverageRadius  = (lightRingOutsideDiameter+lightRingInsideDiameter)/4;
 smidge                  = 0.1;
-grooveMountThickness    = 3;
+grooveMountThickness    = 3-smidge;
 grooveMountRadius       = 17/2;
 mount_radius    = 16;  // Hotend mounting screws
 minkowskiCircleRadius   = 0.75;
-
-
-module doughnut()
-{
-    rotate_extrude(convexity=10)
-	translate([lightRingAverageRadius, 0, 0])
-	circle(r=2.5+(lightRingOutsideDiameter+10*smidge -
-                 (lightRingInsideDiameter-10*smidge))/4);
-}
 
 module grooveMount()
 {
@@ -69,7 +60,7 @@ module grooveMount()
                 minkowski()
                 {
                     translate([0, 20, 0])
-                    hexagonHole();
+                    hexagonHole(); // from HeffaEffector_Polystroooder.scad
                     
                     circle(r=minkowskiCircleRadius);
                 }
