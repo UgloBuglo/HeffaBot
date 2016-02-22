@@ -13,6 +13,10 @@
 
 // Holds one PolyStroooder Tri Hotend using a groove mount.
 // Print in nylon or other plastic with higher temperature tolerance
+//
+// Update 2016-01-12
+// - Moved fan lugs by 60 degrees for better aim at the tip of each hotend. Also, this frees up some
+//   some space between the effector and the idler belts.
 
 $fn = 360/4;
 include <configuration.scad>;
@@ -26,10 +30,11 @@ lightRingOutsideDiameter= 60;
 lightRingInsideDiameter = 51;
 lightRingAverageRadius  = (lightRingOutsideDiameter+lightRingInsideDiameter)/4;
 fanThickness            = 15.3+2*smidge;
-fanLugThickness			=  3.25;
-fanLugRadiusInner		=  5.2/2;
-fanLugRadiusOuter		=  7.0/2;
-fanLugOffset		    = 35.0;
+fanLugThickness			= 3.25;
+fanLugRadiusInner		= 5.2/2;
+fanLugRadiusOuter		= 7.0/2;
+//fanLugOffset		    = 35.0;
+fanLugOffset		    = 38.0;
 
 
 module m3x8BallStud() 
@@ -144,7 +149,7 @@ module hexagonHole()
 
 module effector_2d() 
 {
-    mount_radius    = 16;  // Hotend mounting screws
+    mount_radius = 16;  // Hotend mounting screws
 
     difference() 
     {
@@ -235,9 +240,9 @@ module effectorOutside()
 			}
 
 			// Add a fan attachment in the middle of each side.
-			for (i = [0:sides])
+            for (i = [0:sides])
 			{
-                angle = i * 360/sides;
+                angle = i * 360/sides + 60; // rotated 60 degrees - HB, 2016-01-12
 				rotate([0, 0, angle])
 				translate([0, fanLugOffset,
 							  min(fanLugRadiusInner, fanLugRadiusOuter)])
@@ -271,9 +276,9 @@ module effectorOutside()
 		}
 
 		// Hollow out fan attachments in the middle of each side.
-		for (i = [0:sides])
+		*for (i = [0:sides]) // not needed when fanLugOffset > 35mm
 		{
-            angle = i * 360/sides;
+            angle = i * 360/sides + 60;
 			rotate([0, 0, angle])
 			translate([0, fanLugOffset, 
 					   min(fanLugRadiusInner, fanLugRadiusOuter)])
@@ -344,12 +349,13 @@ union()
 {
 	effectorOutside();
 
-  effectorInside();
+    effectorInside();
 }
 
 
 // Add the fan arms.
-for (i = [0:3])
-	rotate([0, 0, 60+i*120])
-	translate([0, -43, 0])
+*for (i = [0:3])
+	rotate([0, 0, i*120])
+	translate([0, -46, 0])
 	fanArm();
+
