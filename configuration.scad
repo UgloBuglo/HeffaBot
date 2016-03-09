@@ -1,3 +1,8 @@
+// 2016-03-08 Håkan Berg
+// - moved parameters for the blower fan from HeffaBot_Effector_PolyStroooder.scad to 
+//   be able to use them in more models. Also moved in some other parameters from other 
+//   models.
+
 // Increase this if your slicer or printer make holes too tight.
 extra_radius        = 0.05;
 
@@ -14,19 +19,27 @@ m3_wide_radius      = m3_major/2 + extra_radius + 0.2;  // 1.675
 offset              = 20;   // hexagon and mount hole offset
 
 smidge              = 0.1;
-mmPerInch			= 25.4;
+mmPerInch           = 25.4;
 m3Radius            = (3.0 + 0.2) / 2;  // 1.6
-m3LooseRadius		= m3Radius + 0.2;   // 1.8
+m3LooseRadius       = m3Radius + 0.2;   // 1.8
 m3HeadHeight        = 3.0;
 m3LooseHeadRadius   = (5.4 + 0.6) / 2;
 m3NutRadius         = (6.25 + 0.75) / 2;
 m3LooseNutRadius    = m3NutRadius + 0.2;
-m3NutHeight			= 2.4;
+m3NutHeight         = 2.4;
 m3LockNutRadius     = (6.25 + 0.75) / 2;
 m3LockNutHeight     = 4.0;
 m3SocketHeadDiameter= 5.5 + (extra_radius * 2);
 m3SocketHeadRadius  = m3SocketHeadDiameter / 2;
 //ballJointSeparation = 48.0;
 ballJointSeparation = 39.7;
-ballRadius			= (3/8 * mmPerInch)/2;
-ballBaseRadius		= 10.0 / 2;
+ballRadius          = (3/8 * mmPerInch)/2;
+ballBaseRadius      = 10.0 / 2;
+
+mount_radius        = 16;  // Hotend mounting screws
+
+// Blower fan parameters
+fanThickness        = 15.3+2*smidge;
+fanLugThickness			= 3.25;
+fanLugRadiusInner		= 5.2/2;
+fanLugRadiusOuter		= 7.0/2;
