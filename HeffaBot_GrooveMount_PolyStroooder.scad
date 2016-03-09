@@ -6,9 +6,13 @@
 //
 // Håkan Berg
 // hakan.berg.666@gmail.com
-
+//
 // Holds one PolyStroooder Tri Hotend using the groove mount.
 // Print in nylon or other plastic with higher temperature tolerance
+//
+// 2016-03-08 Håkan Berg
+// - use parameters smidge & mount_radius from configuration.scad instead. 
+//   Better to have it in one place when used in several models.
 
 include <configuration.scad>;
 use     <HeffaBot_Effector_PolyStroooder.scad>;
@@ -17,10 +21,8 @@ $fn = 360/4;
 lightRingOutsideDiameter= 60;
 lightRingInsideDiameter = 51;
 lightRingAverageRadius  = (lightRingOutsideDiameter+lightRingInsideDiameter)/4;
-smidge                  = 0.1;
 grooveMountThickness    = 3-smidge;
 grooveMountRadius       = 17/2;
-mount_radius            = 16;  // Hotend mounting screws
 minkowskiCircleRadius   = 0.75;
 
 module grooveMount()
