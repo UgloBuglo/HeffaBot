@@ -14,9 +14,14 @@
 // Holds one PolyStroooder Tri Hotend using a groove mount.
 // Print in nylon or other plastic with higher temperature tolerance
 //
-// Update 2016-01-12
+// 2016-01-12
 // - Moved fan lugs by 60 degrees for better aim at the tip of each hotend. Also, this frees up some
 //   some space between the effector and the idler belts.
+//
+// 2016-03-08
+// - moved parameters for the blower fan to configuration.scad to be used in more models. Also moved
+//   some other parameters to configuration.scad at the same time.
+
 
 $fn = 360/4;
 include <configuration.scad>;
@@ -26,14 +31,11 @@ insideBaseRadius        = 47.5 / 2;
 baseHeight              = 4.2;
 sides                   = 3;
 ballStudBaseOffset		= 48.0 / 2;
+
 lightRingOutsideDiameter= 60;
 lightRingInsideDiameter = 51;
 lightRingAverageRadius  = (lightRingOutsideDiameter+lightRingInsideDiameter)/4;
-fanThickness            = 15.3+2*smidge;
-fanLugThickness			= 3.25;
-fanLugRadiusInner		= 5.2/2;
-fanLugRadiusOuter		= 7.0/2;
-//fanLugOffset		    = 35.0;
+
 fanLugOffset		    = 38.0;
 
 
@@ -149,8 +151,6 @@ module hexagonHole()
 
 module effector_2d() 
 {
-    mount_radius = 16;  // Hotend mounting screws
-
     difference() 
     {
         // basic effector shape
